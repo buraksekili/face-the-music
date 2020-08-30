@@ -150,7 +150,7 @@ const App = () => {
                                 }
                                 height="80"
                                 frameBorder="0"
-                                allowtransparency="true"
+                                allowTransparency="true"
                                 allow="encrypted-media"
                                 title="Spotify Preview"
                             ></iframe>
