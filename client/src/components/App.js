@@ -19,9 +19,7 @@ const App = () => {
 
     // Authorize client
     const fetchToken = () => {
-        axios.get("/api/token").then((res) => {
-            console.log("res");
-        });
+        axios.get("/api/token").then((res) => console.log("auth"));
     };
 
     // Get recommendations based on input music
@@ -52,7 +50,8 @@ const App = () => {
             .post("/api/music", { track: inputRef.current.value })
             .then((res) => {
                 if (res.data === "Refresh") {
-                    statusRef.current.innerHTML = "Please refresh the page and try again.";
+                    statusRef.current.innerHTML =
+                        "Please refresh the page and try again.";
                     return;
                 }
                 if (res.data.tracks.items.length === 0) return;
@@ -99,7 +98,10 @@ const App = () => {
             <nav className="app-nav">
                 <h1>Face the Music</h1>
                 <h2>
-                    <a href="http://www.google.com" target="_blank">
+                    <a
+                        href="https://github.com/buraksekili/face-the-music"
+                        target="_blank"
+                    >
                         Github
                     </a>
                 </h2>
