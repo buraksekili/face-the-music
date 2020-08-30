@@ -60,7 +60,7 @@ router.post("/api/music", (req, res) => {
 });
 
 router.post("/api/recommendation", (req, res) => {
-    const { artistId, musicId, musicName } = req.body.musicObj;
+    const { artistId, musicId } = req.body.musicObj;
 
     var data = qs.stringify({});
     let params = {};
