@@ -1,7 +1,7 @@
-import React, { useState, useRef, useEffect } from "react";
-import axios from "axios";
-import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
+import TextField from "@material-ui/core/TextField";
+import axios from "axios";
+import React, { useEffect, useRef, useState } from "react";
 
 const initRecomObj = [
     {
@@ -80,6 +80,17 @@ const App = () => {
             });
     };
 
+    const handleSubmission = () => {
+        if (inputRef.current.value.trim().length < 2) {
+            statusRef.current.innerHTML =
+                "You need to enter proper artist or song name.";
+            return;
+        }
+        statusRef.current.innerHTML = "";
+        setRecom(initRecomObj);
+        getMusic();
+    };
+
     // Authorize client for the first mount.
     useEffect(() => {
         fetchToken();
@@ -109,24 +120,17 @@ const App = () => {
 
             <div className="music-input">
                 <TextField
+                    onKeyPress={(e) => {
+                        if (e.key === "Enter") {
+                            handleSubmission();
+                        }
+                    }}
                     required={true}
                     id="standard-basic"
                     placeholder="Artist or song name"
                     inputRef={inputRef}
                 />
-                <Button
-                    variant="outlined"
-                    onClick={() => {
-                        if (inputRef.current.value.trim().length < 2) {
-                            statusRef.current.innerHTML =
-                                "You need to enter proper artist or song name.";
-                            return;
-                        }
-                        statusRef.current.innerHTML = "";
-                        setRecom(initRecomObj);
-                        getMusic();
-                    }}
-                >
+                <Button variant="outlined" onClick={() => handleSubmission()}>
                     Recommend songs!
                 </Button>
                 <p ref={statusRef}></p>
